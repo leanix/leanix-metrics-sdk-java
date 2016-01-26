@@ -36,18 +36,18 @@ public class ShowSeries {
         SeriesApi seriesApi = new SeriesApi(client);
         
         try {
-            SeriesResponse response = seriesApi.getSeries("SELECT * FROM CPU", "12345");
+            SeriesResponse response = seriesApi.getSeries("SELECT MAX(Series1) FROM availability WHERE time > '2016-01-01' GROUP BY time(1d)", "abc");
             
             System.out.println("Showing data of measurement: " + response.getData().getName());
             
-            int index = response.getData().getColumns().indexOf("load");
+            int index = response.getData().getFields().indexOf("max");
             
             for (Value v : response.getData().getValues()) {
                 System.out.println(v.getT() + ": " + v.getV().get(index));
             }
             
         } catch (ApiException ex) {
-            Logger.getLogger(ShowSeries.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowSeries.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 }

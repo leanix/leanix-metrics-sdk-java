@@ -66,12 +66,14 @@ public class MeasurementsApi {
      *
      * @throws ApiException
      */
-    public MeasurementListResponse getMeasurements (String workspaceId) throws ApiException {
+    public MeasurementListResponse getMeasurements (String q, String workspaceId) throws ApiException {
         // create path and map variables
         String path = "/measurements".replaceAll("\\{format\\}","json");
 
         // query params
         Map<String, String> queryParams = new HashMap<String, String>();
+        if(!"null".equals(String.valueOf(q)))
+        queryParams.put("q", String.valueOf(q));
         if(!"null".equals(String.valueOf(workspaceId)))
         queryParams.put("workspaceId", String.valueOf(workspaceId));
         Map<String, String> headerParams = new HashMap<String, String>();
