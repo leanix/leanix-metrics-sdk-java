@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Set;
 
+import java.util.Date;
 import java.util.*;
 import net.leanix.metrics.api.models.Field;
 import net.leanix.metrics.api.models.Tag;
@@ -35,6 +36,7 @@ public class Point implements Serializable {
     private String measurement = null;
     /* A UUID string to relate the point to a workspace */
     private String workspaceId = null;
+    private Date time = null;
     /* List of tags */
     private List<Tag> tags = new ArrayList<Tag>();
     /* List of fields */
@@ -57,6 +59,16 @@ public class Point implements Serializable {
     @JsonProperty("workspaceId")
     public void setWorkspaceId(String workspaceId) {
         this.workspaceId = workspaceId;
+    }
+
+    @JsonProperty("time")
+    public Date getTime() {
+        return time;
+    }
+
+    @JsonProperty("time")
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     @JsonProperty("tags")
@@ -85,6 +97,7 @@ public class Point implements Serializable {
         sb.append("class Point {\n");
         sb.append("  measurement: ").append(measurement).append("\n");
         sb.append("  workspaceId: ").append(workspaceId).append("\n");
+        sb.append("  time: ").append(time).append("\n");
         sb.append("  tags: ").append(tags).append("\n");
         sb.append("  fields: ").append(fields).append("\n");
         sb.append("}\n");

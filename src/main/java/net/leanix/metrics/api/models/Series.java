@@ -31,7 +31,7 @@ import java.util.*;
 import net.leanix.metrics.api.models.Value;
 public class Series implements Serializable {
     private String name = null;
-    private List<String> columns = new ArrayList<String>();
+    private List<String> fields = new ArrayList<String>();
     private List<Value> values = new ArrayList<Value>();
     @JsonProperty("name")
     public String getName() {
@@ -43,14 +43,14 @@ public class Series implements Serializable {
         this.name = name;
     }
 
-    @JsonProperty("columns")
-    public List<String> getColumns() {
-        return columns;
+    @JsonProperty("fields")
+    public List<String> getFields() {
+        return fields;
     }
 
-    @JsonProperty("columns")
-    public void setColumns(List<String> columns) {
-        this.columns = columns;
+    @JsonProperty("fields")
+    public void setFields(List<String> fields) {
+        this.fields = fields;
     }
 
     @JsonProperty("values")
@@ -68,7 +68,7 @@ public class Series implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class Series {\n");
         sb.append("  name: ").append(name).append("\n");
-        sb.append("  columns: ").append(columns).append("\n");
+        sb.append("  fields: ").append(fields).append("\n");
         sb.append("  values: ").append(values).append("\n");
         sb.append("}\n");
         return sb.toString();

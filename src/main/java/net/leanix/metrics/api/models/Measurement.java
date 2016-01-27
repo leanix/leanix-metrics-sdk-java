@@ -27,8 +27,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Set;
 
+import java.util.*;
 public class Measurement implements Serializable {
     private String name = null;
+    private List<String> fields = new ArrayList<String>();
     @JsonProperty("name")
     public String getName() {
         return name;
@@ -39,11 +41,22 @@ public class Measurement implements Serializable {
         this.name = name;
     }
 
+    @JsonProperty("fields")
+    public List<String> getFields() {
+        return fields;
+    }
+
+    @JsonProperty("fields")
+    public void setFields(List<String> fields) {
+        this.fields = fields;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Measurement {\n");
         sb.append("  name: ").append(name).append("\n");
+        sb.append("  fields: ").append(fields).append("\n");
         sb.append("}\n");
         return sb.toString();
     }
