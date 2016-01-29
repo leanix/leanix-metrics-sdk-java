@@ -4,12 +4,12 @@
 
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
 
     <parent>
         <groupId>net.leanix.poms</groupId>
         <artifactId>sdk-parent</artifactId>
-        <version>0.9.6</version>
+        <version>0.9.7</version>
         <relativePath />
     </parent>
 
