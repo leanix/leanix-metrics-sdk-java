@@ -32,11 +32,11 @@ import net.leanix.metrics.api.models.Series;
 import net.leanix.metrics.api.models.ApiError;
 public class SeriesResponse implements Serializable {
     private Series data = null;
-    private List<ApiError> errors = new ArrayList<ApiError>();
-    private String status = null;
     private String message = null;
     private String type = null;
     private Long total = null;
+    private String status = null;
+    private List<ApiError> errors = new ArrayList<ApiError>();
     @JsonProperty("data")
     public Series getData() {
         return data;
@@ -45,26 +45,6 @@ public class SeriesResponse implements Serializable {
     @JsonProperty("data")
     public void setData(Series data) {
         this.data = data;
-    }
-
-    @JsonProperty("errors")
-    public List<ApiError> getErrors() {
-        return errors;
-    }
-
-    @JsonProperty("errors")
-    public void setErrors(List<ApiError> errors) {
-        this.errors = errors;
-    }
-
-    @JsonProperty("status")
-    public String getStatus() {
-        return status;
-    }
-
-    @JsonProperty("status")
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @JsonProperty("message")
@@ -97,16 +77,36 @@ public class SeriesResponse implements Serializable {
         this.total = total;
     }
 
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    @JsonProperty("status")
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @JsonProperty("errors")
+    public List<ApiError> getErrors() {
+        return errors;
+    }
+
+    @JsonProperty("errors")
+    public void setErrors(List<ApiError> errors) {
+        this.errors = errors;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class SeriesResponse {\n");
         sb.append("  data: ").append(data).append("\n");
-        sb.append("  errors: ").append(errors).append("\n");
-        sb.append("  status: ").append(status).append("\n");
         sb.append("  message: ").append(message).append("\n");
         sb.append("  type: ").append(type).append("\n");
         sb.append("  total: ").append(total).append("\n");
+        sb.append("  status: ").append(status).append("\n");
+        sb.append("  errors: ").append(errors).append("\n");
         sb.append("}\n");
         return sb.toString();
     }
