@@ -29,35 +29,48 @@ import java.util.Set;
 
 public class Field implements Serializable {
     /* Field key */
-    private String k = null;
-    /* Field value (Number) */
-    private Float v = null;
-    @JsonProperty("k")
-    public String getK() {
-        return k;
+    private String key = null;
+    /* Field value (character string). Don't use together with floating point number value! */
+    private String stringValue = null;
+    /* Field value (floating point number). Don't use together with character string value! */
+    private Double floatValue = null;
+    @JsonProperty("key")
+    public String getKey() {
+        return key;
     }
 
-    @JsonProperty("k")
-    public void setK(String k) {
-        this.k = k;
+    @JsonProperty("key")
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    @JsonProperty("v")
-    public Float getV() {
-        return v;
+    @JsonProperty("stringValue")
+    public String getStringValue() {
+        return stringValue;
     }
 
-    @JsonProperty("v")
-    public void setV(Float v) {
-        this.v = v;
+    @JsonProperty("stringValue")
+    public void setStringValue(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
+    @JsonProperty("floatValue")
+    public Double getFloatValue() {
+        return floatValue;
+    }
+
+    @JsonProperty("floatValue")
+    public void setFloatValue(Double floatValue) {
+        this.floatValue = floatValue;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Field {\n");
-        sb.append("  k: ").append(k).append("\n");
-        sb.append("  v: ").append(v).append("\n");
+        sb.append("  key: ").append(key).append("\n");
+        sb.append("  stringValue: ").append(stringValue).append("\n");
+        sb.append("  floatValue: ").append(floatValue).append("\n");
         sb.append("}\n");
         return sb.toString();
     }

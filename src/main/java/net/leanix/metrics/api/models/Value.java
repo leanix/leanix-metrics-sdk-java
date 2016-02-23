@@ -29,9 +29,10 @@ import java.util.Set;
 
 import java.util.Date;
 import java.util.*;
+
 public class Value implements Serializable {
     private Date t = null;
-    private List<Float> v = new ArrayList<Float>();
+    private List<Object> v = new ArrayList<Object>();
     @JsonProperty("t")
     public Date getT() {
         return t;
@@ -43,12 +44,12 @@ public class Value implements Serializable {
     }
 
     @JsonProperty("v")
-    public List<Float> getV() {
+    public List<Object> getV() {
         return v;
     }
 
     @JsonProperty("v")
-    public void setV(List<Float> v) {
+    public void setV(List<Object> v) {
         this.v = v;
     }
 
