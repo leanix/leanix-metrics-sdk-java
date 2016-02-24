@@ -4,7 +4,7 @@
 
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.2.4</version>
+    <version>0.2.5-SNAPSHOT</version>
 
     <parent>
         <groupId>net.leanix.poms</groupId>
