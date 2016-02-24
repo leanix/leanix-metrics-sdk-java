@@ -29,9 +29,20 @@ import java.util.Set;
 
 import java.util.Date;
 import java.util.*;
+
 public class Value implements Serializable {
+    private List<Object> v = new ArrayList<Object>();
     private Date t = null;
-    private List<Float> v = new ArrayList<Float>();
+    @JsonProperty("v")
+    public List<Object> getV() {
+        return v;
+    }
+
+    @JsonProperty("v")
+    public void setV(List<Object> v) {
+        this.v = v;
+    }
+
     @JsonProperty("t")
     public Date getT() {
         return t;
@@ -42,22 +53,12 @@ public class Value implements Serializable {
         this.t = t;
     }
 
-    @JsonProperty("v")
-    public List<Float> getV() {
-        return v;
-    }
-
-    @JsonProperty("v")
-    public void setV(List<Float> v) {
-        this.v = v;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Value {\n");
-        sb.append("  t: ").append(t).append("\n");
         sb.append("  v: ").append(v).append("\n");
+        sb.append("  t: ").append(t).append("\n");
         sb.append("}\n");
         return sb.toString();
     }

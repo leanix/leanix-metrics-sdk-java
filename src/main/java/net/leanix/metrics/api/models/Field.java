@@ -30,8 +30,10 @@ import java.util.Set;
 public class Field implements Serializable {
     /* Field key */
     private String k = null;
-    /* Field value (Number) */
-    private Float v = null;
+    /* Field value (floating point number). Don't use together with character string value! */
+    private Double v = null;
+    /* Field value (character string). Don't use together with floating point number value! */
+    private String s = null;
     @JsonProperty("k")
     public String getK() {
         return k;
@@ -43,13 +45,23 @@ public class Field implements Serializable {
     }
 
     @JsonProperty("v")
-    public Float getV() {
+    public Double getV() {
         return v;
     }
 
     @JsonProperty("v")
-    public void setV(Float v) {
+    public void setV(Double v) {
         this.v = v;
+    }
+
+    @JsonProperty("s")
+    public String getS() {
+        return s;
+    }
+
+    @JsonProperty("s")
+    public void setS(String s) {
+        this.s = s;
     }
 
     @Override
@@ -58,6 +70,7 @@ public class Field implements Serializable {
         sb.append("class Field {\n");
         sb.append("  k: ").append(k).append("\n");
         sb.append("  v: ").append(v).append("\n");
+        sb.append("  s: ").append(s).append("\n");
         sb.append("}\n");
         return sb.toString();
     }

@@ -34,7 +34,7 @@ import net.leanix.metrics.api.models.Tag;
 public class Point implements Serializable {
     /* A name for the measurement */
     private String measurement = null;
-    /* A UUID string to relate the point to a workspace */
+    /* A UUID string to relate the point to a workspace or "shared" if the shared database should be used. */
     private String workspaceId = null;
     private Date time = null;
     /* List of tags */
