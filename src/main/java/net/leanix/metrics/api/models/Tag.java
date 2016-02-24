@@ -28,20 +28,10 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class Tag implements Serializable {
-    /* Tag key */
-    private String k = null;
     /* Tag value */
     private String v = null;
-    @JsonProperty("k")
-    public String getK() {
-        return k;
-    }
-
-    @JsonProperty("k")
-    public void setK(String k) {
-        this.k = k;
-    }
-
+    /* Tag key */
+    private String k = null;
     @JsonProperty("v")
     public String getV() {
         return v;
@@ -52,12 +42,22 @@ public class Tag implements Serializable {
         this.v = v;
     }
 
+    @JsonProperty("k")
+    public String getK() {
+        return k;
+    }
+
+    @JsonProperty("k")
+    public void setK(String k) {
+        this.k = k;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Tag {\n");
-        sb.append("  k: ").append(k).append("\n");
         sb.append("  v: ").append(v).append("\n");
+        sb.append("  k: ").append(k).append("\n");
         sb.append("}\n");
         return sb.toString();
     }
