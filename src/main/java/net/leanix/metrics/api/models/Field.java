@@ -29,48 +29,48 @@ import java.util.Set;
 
 public class Field implements Serializable {
     /* Field key */
-    private String key = null;
-    /* Field value (character string). Don't use together with floating point number value! */
-    private String stringValue = null;
+    private String k = null;
     /* Field value (floating point number). Don't use together with character string value! */
-    private Double floatValue = null;
-    @JsonProperty("key")
-    public String getKey() {
-        return key;
+    private Double v = null;
+    /* Field value (character string). Don't use together with floating point number value! */
+    private String s = null;
+    @JsonProperty("k")
+    public String getK() {
+        return k;
     }
 
-    @JsonProperty("key")
-    public void setKey(String key) {
-        this.key = key;
+    @JsonProperty("k")
+    public void setK(String k) {
+        this.k = k;
     }
 
-    @JsonProperty("stringValue")
-    public String getStringValue() {
-        return stringValue;
+    @JsonProperty("v")
+    public Double getV() {
+        return v;
     }
 
-    @JsonProperty("stringValue")
-    public void setStringValue(String stringValue) {
-        this.stringValue = stringValue;
+    @JsonProperty("v")
+    public void setV(Double v) {
+        this.v = v;
     }
 
-    @JsonProperty("floatValue")
-    public Double getFloatValue() {
-        return floatValue;
+    @JsonProperty("s")
+    public String getS() {
+        return s;
     }
 
-    @JsonProperty("floatValue")
-    public void setFloatValue(Double floatValue) {
-        this.floatValue = floatValue;
+    @JsonProperty("s")
+    public void setS(String s) {
+        this.s = s;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Field {\n");
-        sb.append("  key: ").append(key).append("\n");
-        sb.append("  stringValue: ").append(stringValue).append("\n");
-        sb.append("  floatValue: ").append(floatValue).append("\n");
+        sb.append("  k: ").append(k).append("\n");
+        sb.append("  v: ").append(v).append("\n");
+        sb.append("  s: ").append(s).append("\n");
         sb.append("}\n");
         return sb.toString();
     }

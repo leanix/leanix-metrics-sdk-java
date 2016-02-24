@@ -31,18 +31,8 @@ import java.util.Date;
 import java.util.*;
 
 public class Value implements Serializable {
-    private Date t = null;
     private List<Object> v = new ArrayList<Object>();
-    @JsonProperty("t")
-    public Date getT() {
-        return t;
-    }
-
-    @JsonProperty("t")
-    public void setT(Date t) {
-        this.t = t;
-    }
-
+    private Date t = null;
     @JsonProperty("v")
     public List<Object> getV() {
         return v;
@@ -53,12 +43,22 @@ public class Value implements Serializable {
         this.v = v;
     }
 
+    @JsonProperty("t")
+    public Date getT() {
+        return t;
+    }
+
+    @JsonProperty("t")
+    public void setT(Date t) {
+        this.t = t;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Value {\n");
-        sb.append("  t: ").append(t).append("\n");
         sb.append("  v: ").append(v).append("\n");
+        sb.append("  t: ").append(t).append("\n");
         sb.append("}\n");
         return sb.toString();
     }

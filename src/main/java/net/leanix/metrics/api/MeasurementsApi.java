@@ -61,6 +61,37 @@ public class MeasurementsApi {
     }
 
     /**
+     * getMeasurements.
+     * Endpoint to retrieve all measurements
+     *
+     * @throws ApiException
+     */
+    public MeasurementListResponse getMeasurements (String q, String workspaceId) throws ApiException {
+        // create path and map variables
+        String path = "/measurements".replaceAll("\\{format\\}","json");
+
+        // query params
+        Map<String, String> queryParams = new HashMap<String, String>();
+        if(!"null".equals(String.valueOf(q)))
+        queryParams.put("q", String.valueOf(q));
+        if(!"null".equals(String.valueOf(workspaceId)))
+        queryParams.put("workspaceId", String.valueOf(workspaceId));
+        Map<String, String> headerParams = new HashMap<String, String>();
+        try {
+            return apiClient.resource(path)
+                .queryParams(buildmvm(queryParams))
+                .method("GET", MeasurementListResponse.class);
+        } catch (UniformInterfaceException ex) {
+            if (ex.getResponse().getStatus() == 404) {
+                return null;
+            } else if(ex.getResponse().getStatus() == 422) {
+                throw new ValidationException(ex.getResponse().getEntity(Response.class));
+            } else {
+                throw new ApiException(ex.getResponse().getStatus(), ex.getResponse().toString());
+            }
+        }
+    }
+    /**
      * deleteMeasurement.
      * Deletes a measurement
      *
@@ -83,37 +114,6 @@ public class MeasurementsApi {
             return apiClient.resource(path)
                 .queryParams(buildmvm(queryParams))
                 .method("DELETE", MeasurementResponse.class);
-        } catch (UniformInterfaceException ex) {
-            if (ex.getResponse().getStatus() == 404) {
-                return null;
-            } else if(ex.getResponse().getStatus() == 422) {
-                throw new ValidationException(ex.getResponse().getEntity(Response.class));
-            } else {
-                throw new ApiException(ex.getResponse().getStatus(), ex.getResponse().toString());
-            }
-        }
-    }
-    /**
-     * getMeasurements.
-     * Endpoint to retrieve all measurements
-     *
-     * @throws ApiException
-     */
-    public MeasurementListResponse getMeasurements (String q, String workspaceId) throws ApiException {
-        // create path and map variables
-        String path = "/measurements".replaceAll("\\{format\\}","json");
-
-        // query params
-        Map<String, String> queryParams = new HashMap<String, String>();
-        if(!"null".equals(String.valueOf(q)))
-        queryParams.put("q", String.valueOf(q));
-        if(!"null".equals(String.valueOf(workspaceId)))
-        queryParams.put("workspaceId", String.valueOf(workspaceId));
-        Map<String, String> headerParams = new HashMap<String, String>();
-        try {
-            return apiClient.resource(path)
-                .queryParams(buildmvm(queryParams))
-                .method("GET", MeasurementListResponse.class);
         } catch (UniformInterfaceException ex) {
             if (ex.getResponse().getStatus() == 404) {
                 return null;
