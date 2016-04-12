@@ -6,49 +6,40 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
+import net.leanix.metrics.api.models.SyncItem;
 
 
 
 
 
 
-public class ApiError   {
+public class SyncItemBatch   {
   
-  private String value = null;
-  private List<String> messages = new ArrayList<String>();
-
-  
-  /**
-   **/
-  public ApiError value(String value) {
-    this.value = value;
-    return this;
-  }
-  
-  @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("value")
-  public String getValue() {
-    return value;
-  }
-  public void setValue(String value) {
-    this.value = value;
-  }
+  private List<SyncItem> syncItems = new ArrayList<SyncItem>();
+  private String progress = null;
 
   
   /**
    **/
-  public ApiError messages(List<String> messages) {
-    this.messages = messages;
+  public SyncItemBatch syncItems(List<SyncItem> syncItems) {
+    this.syncItems = syncItems;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("messages")
-  public List<String> getMessages() {
-    return messages;
+  @JsonProperty("syncItems")
+  public List<SyncItem> getSyncItems() {
+    return syncItems;
   }
-  public void setMessages(List<String> messages) {
-    this.messages = messages;
+  public void setSyncItems(List<SyncItem> syncItems) {
+    this.syncItems = syncItems;
+  }
+
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("progress")
+  public String getProgress() {
+    return progress;
   }
 
   
@@ -61,23 +52,23 @@ public class ApiError   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ApiError apiError = (ApiError) o;
-    return Objects.equals(this.value, apiError.value) &&
-        Objects.equals(this.messages, apiError.messages);
+    SyncItemBatch syncItemBatch = (SyncItemBatch) o;
+    return Objects.equals(this.syncItems, syncItemBatch.syncItems) &&
+        Objects.equals(this.progress, syncItemBatch.progress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value, messages);
+    return Objects.hash(syncItems, progress);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ApiError {\n");
+    sb.append("class SyncItemBatch {\n");
     
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    syncItems: ").append(toIndentedString(syncItems)).append("\n");
+    sb.append("    progress: ").append(toIndentedString(progress)).append("\n");
     sb.append("}");
     return sb.toString();
   }

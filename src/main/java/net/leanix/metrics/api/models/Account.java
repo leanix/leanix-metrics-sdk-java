@@ -4,51 +4,49 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
 
 
 
-public class ApiError   {
+public class Account   {
   
-  private String value = null;
-  private List<String> messages = new ArrayList<String>();
+  private String id = null;
+  private String name = null;
 
   
   /**
    **/
-  public ApiError value(String value) {
-    this.value = value;
+  public Account id(String id) {
+    this.id = id;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("value")
-  public String getValue() {
-    return value;
+  @JsonProperty("id")
+  public String getId() {
+    return id;
   }
-  public void setValue(String value) {
-    this.value = value;
+  public void setId(String id) {
+    this.id = id;
   }
 
   
   /**
    **/
-  public ApiError messages(List<String> messages) {
-    this.messages = messages;
+  public Account name(String name) {
+    this.name = name;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("messages")
-  public List<String> getMessages() {
-    return messages;
+  @JsonProperty("name")
+  public String getName() {
+    return name;
   }
-  public void setMessages(List<String> messages) {
-    this.messages = messages;
+  public void setName(String name) {
+    this.name = name;
   }
 
   
@@ -61,23 +59,23 @@ public class ApiError   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ApiError apiError = (ApiError) o;
-    return Objects.equals(this.value, apiError.value) &&
-        Objects.equals(this.messages, apiError.messages);
+    Account account = (Account) o;
+    return Objects.equals(this.id, account.id) &&
+        Objects.equals(this.name, account.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value, messages);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ApiError {\n");
+    sb.append("class Account {\n");
     
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

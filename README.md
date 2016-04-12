@@ -92,3 +92,7 @@ try {
 * Todo: Metics currently does not have authentication activated - in future access will be possible using oAuth Access Tokens.
 * Todo: Allow to submit date when creating a new point
 * Todo: Support creation of more than one point at once (batch)
+
+# Generate the SDK
+
+	mvn clean package -Pcodegen
