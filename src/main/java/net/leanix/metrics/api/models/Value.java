@@ -5,41 +5,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import net.leanix.metrics.api.models.SyncItem;
 
 
 
 
 
 
-public class SyncItemBatch   {
+public class Value   {
   
-  private List<SyncItem> syncItems = new ArrayList<SyncItem>();
-  private String progress = null;
+  private Date t = null;
+  private List<Object> v = new ArrayList<Object>();
 
   
   /**
    **/
-  public SyncItemBatch syncItems(List<SyncItem> syncItems) {
-    this.syncItems = syncItems;
+  public Value t(Date t) {
+    this.t = t;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("syncItems")
-  public List<SyncItem> getSyncItems() {
-    return syncItems;
+  @JsonProperty("t")
+  public Date getT() {
+    return t;
   }
-  public void setSyncItems(List<SyncItem> syncItems) {
-    this.syncItems = syncItems;
+  public void setT(Date t) {
+    this.t = t;
   }
 
   
+  /**
+   **/
+  public Value v(List<Object> v) {
+    this.v = v;
+    return this;
+  }
+  
   @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("progress")
-  public String getProgress() {
-    return progress;
+  @JsonProperty("v")
+  public List<Object> getV() {
+    return v;
+  }
+  public void setV(List<Object> v) {
+    this.v = v;
   }
 
   
@@ -52,23 +62,23 @@ public class SyncItemBatch   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SyncItemBatch syncItemBatch = (SyncItemBatch) o;
-    return Objects.equals(this.syncItems, syncItemBatch.syncItems) &&
-        Objects.equals(this.progress, syncItemBatch.progress);
+    Value value = (Value) o;
+    return Objects.equals(this.t, value.t) &&
+        Objects.equals(this.v, value.v);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(syncItems, progress);
+    return Objects.hash(t, v);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SyncItemBatch {\n");
+    sb.append("class Value {\n");
     
-    sb.append("    syncItems: ").append(toIndentedString(syncItems)).append("\n");
-    sb.append("    progress: ").append(toIndentedString(progress)).append("\n");
+    sb.append("    t: ").append(toIndentedString(t)).append("\n");
+    sb.append("    v: ").append(toIndentedString(v)).append("\n");
     sb.append("}");
     return sb.toString();
   }

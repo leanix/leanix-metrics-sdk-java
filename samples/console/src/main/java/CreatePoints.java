@@ -1,3 +1,4 @@
+
 /*
 * The MIT License (MIT)	 
 *
@@ -22,26 +23,31 @@
 */
 
 import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.management.OperatingSystemMXBean;
-import net.leanix.dropkit.api.ApiException;
-import net.leanix.dropkit.api.Client;
-import net.leanix.dropkit.api.ClientFactory;
+import net.leanix.dropkit.apiclient.ApiClient;
+import net.leanix.dropkit.apiclient.ApiException;
 import net.leanix.metrics.api.PointsApi;
 import net.leanix.metrics.api.models.Field;
 import net.leanix.metrics.api.models.Point;
 import net.leanix.metrics.api.models.Tag;
 
 public class CreatePoints {
-    public static void main(String[] args) {
-        Client client = ClientFactory.create("https://local-svc.leanix.net/services/metrics/v1");
-        final PointsApi pointsApi = new PointsApi(client);
 
+    public static void main(String[] args) {
+        ApiClient apiClient = new ApiClient();
+        apiClient.setBasePath("https://local-svc.leanix.net/services/metrics/v1");
+        apiClient.setDebugging(true);
+
+        // TODO rwe: set Personal Access Token here
+        // apiClient.setClientCredentials("", CLIENT_SECRET, URI.create(tokenUrl));
+
+        final PointsApi pointsApi = new PointsApi(apiClient);
 
         Runnable helloRunnable = new Runnable() {
             public void run() {
@@ -56,7 +62,7 @@ public class CreatePoints {
                 // Add a field
                 Field f1 = new Field();
                 f1.setK("load");
-                f1.setV(new Float(osBean.getProcessCpuLoad()));
+                f1.setV(osBean.getSystemLoadAverage());
 
                 // Add a tag
                 Tag t1 = new Tag();

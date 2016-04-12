@@ -7,26 +7,24 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import net.leanix.metrics.api.models.ApiError;
-import net.leanix.metrics.api.models.SyncItem;
 
 
 
 
 
 
-public class SyncItemListResponse   {
+public class BasicResponse   {
   
   private String status = null;
   private String type = null;
   private String message = null;
   private List<ApiError> errors = new ArrayList<ApiError>();
   private Long total = null;
-  private List<SyncItem> data = new ArrayList<SyncItem>();
 
   
   /**
    **/
-  public SyncItemListResponse status(String status) {
+  public BasicResponse status(String status) {
     this.status = status;
     return this;
   }
@@ -43,7 +41,7 @@ public class SyncItemListResponse   {
   
   /**
    **/
-  public SyncItemListResponse type(String type) {
+  public BasicResponse type(String type) {
     this.type = type;
     return this;
   }
@@ -60,7 +58,7 @@ public class SyncItemListResponse   {
   
   /**
    **/
-  public SyncItemListResponse message(String message) {
+  public BasicResponse message(String message) {
     this.message = message;
     return this;
   }
@@ -77,7 +75,7 @@ public class SyncItemListResponse   {
   
   /**
    **/
-  public SyncItemListResponse errors(List<ApiError> errors) {
+  public BasicResponse errors(List<ApiError> errors) {
     this.errors = errors;
     return this;
   }
@@ -94,7 +92,7 @@ public class SyncItemListResponse   {
   
   /**
    **/
-  public SyncItemListResponse total(Long total) {
+  public BasicResponse total(Long total) {
     this.total = total;
     return this;
   }
@@ -109,23 +107,6 @@ public class SyncItemListResponse   {
   }
 
   
-  /**
-   **/
-  public SyncItemListResponse data(List<SyncItem> data) {
-    this.data = data;
-    return this;
-  }
-  
-  @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("data")
-  public List<SyncItem> getData() {
-    return data;
-  }
-  public void setData(List<SyncItem> data) {
-    this.data = data;
-  }
-
-  
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -135,31 +116,29 @@ public class SyncItemListResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SyncItemListResponse syncItemListResponse = (SyncItemListResponse) o;
-    return Objects.equals(this.status, syncItemListResponse.status) &&
-        Objects.equals(this.type, syncItemListResponse.type) &&
-        Objects.equals(this.message, syncItemListResponse.message) &&
-        Objects.equals(this.errors, syncItemListResponse.errors) &&
-        Objects.equals(this.total, syncItemListResponse.total) &&
-        Objects.equals(this.data, syncItemListResponse.data);
+    BasicResponse basicResponse = (BasicResponse) o;
+    return Objects.equals(this.status, basicResponse.status) &&
+        Objects.equals(this.type, basicResponse.type) &&
+        Objects.equals(this.message, basicResponse.message) &&
+        Objects.equals(this.errors, basicResponse.errors) &&
+        Objects.equals(this.total, basicResponse.total);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(status, type, message, errors, total, data);
+    return Objects.hash(status, type, message, errors, total);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SyncItemListResponse {\n");
+    sb.append("class BasicResponse {\n");
     
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
     sb.append("    total: ").append(toIndentedString(total)).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

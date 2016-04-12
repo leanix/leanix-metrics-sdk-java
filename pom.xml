@@ -45,6 +45,7 @@
 
         <!-- Specify the host which provides the swagger 2.0 API description -->
         <codegenHost>test-svc.leanix.net</codegenHost>
+        <swagger-inputSpec>https://${codegenHost}/services/metrics/v1/api-docs/swagger.json</swagger-inputSpec>
     </properties>
 
 
@@ -59,6 +60,33 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
 
+<!-- get help...
+    <profiles>
+        <profile>
+            <id>codegen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.1.6</version>
+                        <configuration>
+                            <configHelp>true</configHelp>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+        -->
 </project>

@@ -93,6 +93,13 @@ try {
 * Todo: Allow to submit date when creating a new point
 * Todo: Support creation of more than one point at once (batch)
 
-# Generate the SDK
+# Update the SDK
+
+## Generate new JAVA sources based service provided swagger.yaml 
+Base on the swagger's API specification (eg: https://boot2docker.leanix.net/services/metrics/v1/api-docs/swagger.json) the swagger API classes will be created.
 
 	mvn clean package -Pcodegen
+	
+## Install the updated SDK in local maven repository
+
+	mvn install

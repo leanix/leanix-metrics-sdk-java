@@ -7,26 +7,26 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import net.leanix.metrics.api.models.ApiError;
-import net.leanix.metrics.api.models.Synchronization;
+import net.leanix.metrics.api.models.Series;
 
 
 
 
 
 
-public class SynchronizationListResponse   {
+public class SeriesResponse   {
   
   private String status = null;
   private String type = null;
   private String message = null;
   private List<ApiError> errors = new ArrayList<ApiError>();
   private Long total = null;
-  private List<Synchronization> data = new ArrayList<Synchronization>();
+  private Series data = null;
 
   
   /**
    **/
-  public SynchronizationListResponse status(String status) {
+  public SeriesResponse status(String status) {
     this.status = status;
     return this;
   }
@@ -43,7 +43,7 @@ public class SynchronizationListResponse   {
   
   /**
    **/
-  public SynchronizationListResponse type(String type) {
+  public SeriesResponse type(String type) {
     this.type = type;
     return this;
   }
@@ -60,7 +60,7 @@ public class SynchronizationListResponse   {
   
   /**
    **/
-  public SynchronizationListResponse message(String message) {
+  public SeriesResponse message(String message) {
     this.message = message;
     return this;
   }
@@ -77,7 +77,7 @@ public class SynchronizationListResponse   {
   
   /**
    **/
-  public SynchronizationListResponse errors(List<ApiError> errors) {
+  public SeriesResponse errors(List<ApiError> errors) {
     this.errors = errors;
     return this;
   }
@@ -94,7 +94,7 @@ public class SynchronizationListResponse   {
   
   /**
    **/
-  public SynchronizationListResponse total(Long total) {
+  public SeriesResponse total(Long total) {
     this.total = total;
     return this;
   }
@@ -111,17 +111,17 @@ public class SynchronizationListResponse   {
   
   /**
    **/
-  public SynchronizationListResponse data(List<Synchronization> data) {
+  public SeriesResponse data(Series data) {
     this.data = data;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
   @JsonProperty("data")
-  public List<Synchronization> getData() {
+  public Series getData() {
     return data;
   }
-  public void setData(List<Synchronization> data) {
+  public void setData(Series data) {
     this.data = data;
   }
 
@@ -135,13 +135,13 @@ public class SynchronizationListResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SynchronizationListResponse synchronizationListResponse = (SynchronizationListResponse) o;
-    return Objects.equals(this.status, synchronizationListResponse.status) &&
-        Objects.equals(this.type, synchronizationListResponse.type) &&
-        Objects.equals(this.message, synchronizationListResponse.message) &&
-        Objects.equals(this.errors, synchronizationListResponse.errors) &&
-        Objects.equals(this.total, synchronizationListResponse.total) &&
-        Objects.equals(this.data, synchronizationListResponse.data);
+    SeriesResponse seriesResponse = (SeriesResponse) o;
+    return Objects.equals(this.status, seriesResponse.status) &&
+        Objects.equals(this.type, seriesResponse.type) &&
+        Objects.equals(this.message, seriesResponse.message) &&
+        Objects.equals(this.errors, seriesResponse.errors) &&
+        Objects.equals(this.total, seriesResponse.total) &&
+        Objects.equals(this.data, seriesResponse.data);
   }
 
   @Override
@@ -152,7 +152,7 @@ public class SynchronizationListResponse   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SynchronizationListResponse {\n");
+    sb.append("class SeriesResponse {\n");
     
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

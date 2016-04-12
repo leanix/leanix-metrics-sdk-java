@@ -7,26 +7,26 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import net.leanix.metrics.api.models.ApiError;
-import net.leanix.metrics.api.models.Synchronization;
+import net.leanix.metrics.api.models.Point;
 
 
 
 
 
 
-public class SynchronizationResponse   {
+public class PointResponse   {
   
   private String status = null;
   private String type = null;
   private String message = null;
   private List<ApiError> errors = new ArrayList<ApiError>();
   private Long total = null;
-  private Synchronization data = null;
+  private Point data = null;
 
   
   /**
    **/
-  public SynchronizationResponse status(String status) {
+  public PointResponse status(String status) {
     this.status = status;
     return this;
   }
@@ -43,7 +43,7 @@ public class SynchronizationResponse   {
   
   /**
    **/
-  public SynchronizationResponse type(String type) {
+  public PointResponse type(String type) {
     this.type = type;
     return this;
   }
@@ -60,7 +60,7 @@ public class SynchronizationResponse   {
   
   /**
    **/
-  public SynchronizationResponse message(String message) {
+  public PointResponse message(String message) {
     this.message = message;
     return this;
   }
@@ -77,7 +77,7 @@ public class SynchronizationResponse   {
   
   /**
    **/
-  public SynchronizationResponse errors(List<ApiError> errors) {
+  public PointResponse errors(List<ApiError> errors) {
     this.errors = errors;
     return this;
   }
@@ -94,7 +94,7 @@ public class SynchronizationResponse   {
   
   /**
    **/
-  public SynchronizationResponse total(Long total) {
+  public PointResponse total(Long total) {
     this.total = total;
     return this;
   }
@@ -111,17 +111,17 @@ public class SynchronizationResponse   {
   
   /**
    **/
-  public SynchronizationResponse data(Synchronization data) {
+  public PointResponse data(Point data) {
     this.data = data;
     return this;
   }
   
   @ApiModelProperty(example = "null", value = "")
   @JsonProperty("data")
-  public Synchronization getData() {
+  public Point getData() {
     return data;
   }
-  public void setData(Synchronization data) {
+  public void setData(Point data) {
     this.data = data;
   }
 
@@ -135,13 +135,13 @@ public class SynchronizationResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SynchronizationResponse synchronizationResponse = (SynchronizationResponse) o;
-    return Objects.equals(this.status, synchronizationResponse.status) &&
-        Objects.equals(this.type, synchronizationResponse.type) &&
-        Objects.equals(this.message, synchronizationResponse.message) &&
-        Objects.equals(this.errors, synchronizationResponse.errors) &&
-        Objects.equals(this.total, synchronizationResponse.total) &&
-        Objects.equals(this.data, synchronizationResponse.data);
+    PointResponse pointResponse = (PointResponse) o;
+    return Objects.equals(this.status, pointResponse.status) &&
+        Objects.equals(this.type, pointResponse.type) &&
+        Objects.equals(this.message, pointResponse.message) &&
+        Objects.equals(this.errors, pointResponse.errors) &&
+        Objects.equals(this.total, pointResponse.total) &&
+        Objects.equals(this.data, pointResponse.data);
   }
 
   @Override
@@ -152,7 +152,7 @@ public class SynchronizationResponse   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SynchronizationResponse {\n");
+    sb.append("class PointResponse {\n");
     
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
