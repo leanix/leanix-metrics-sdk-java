@@ -41,16 +41,16 @@ public class PointsApi {
   /**
    * createDemoPoints
    * Endpoint to create a measurement with demo points
-   * @param body  (required)
+   * @param demoDataRequest  (required)
    * @return BasicResponse
    * @throws ApiException if fails to make API call
    */
-  public BasicResponse createDemoPoints(DemoDataRequest body) throws ApiException {
-    Object localVarPostBody = body;
+  public BasicResponse createDemoPoints(DemoDataRequest demoDataRequest) throws ApiException {
+    Object localVarPostBody = demoDataRequest;
     
-    // verify the required parameter 'body' is set
-    if (body == null) {
-      throw new ApiException(400, "Missing the required parameter 'body' when calling createDemoPoints");
+    // verify the required parameter 'demoDataRequest' is set
+    if (demoDataRequest == null) {
+      throw new ApiException(400, "Missing the required parameter 'demoDataRequest' when calling createDemoPoints");
     }
     
     // create path and map variables
@@ -77,7 +77,7 @@ public class PointsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "token" };
+    String[] localVarAuthNames = new String[] { "pat", "token" };
 
     
     GenericType<BasicResponse> localVarReturnType = new GenericType<BasicResponse>() {};
@@ -88,16 +88,16 @@ public class PointsApi {
   /**
    * createPoint
    * Endpoint to create a new data point
-   * @param body a time series data point to store (required)
+   * @param point a time series data point to store (required)
    * @return PointResponse
    * @throws ApiException if fails to make API call
    */
-  public PointResponse createPoint(Point body) throws ApiException {
-    Object localVarPostBody = body;
+  public PointResponse createPoint(Point point) throws ApiException {
+    Object localVarPostBody = point;
     
-    // verify the required parameter 'body' is set
-    if (body == null) {
-      throw new ApiException(400, "Missing the required parameter 'body' when calling createPoint");
+    // verify the required parameter 'point' is set
+    if (point == null) {
+      throw new ApiException(400, "Missing the required parameter 'point' when calling createPoint");
     }
     
     // create path and map variables
@@ -124,7 +124,7 @@ public class PointsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "token" };
+    String[] localVarAuthNames = new String[] { "pat", "token" };
 
     
     GenericType<PointResponse> localVarReturnType = new GenericType<PointResponse>() {};

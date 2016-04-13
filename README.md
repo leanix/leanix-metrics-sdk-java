@@ -13,7 +13,7 @@ Add a dependency to your maven project:
   <dependency>
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.5</version>
   </dependency>
 </dependencies>
 ```
@@ -21,8 +21,12 @@ Add a dependency to your maven project:
 Initialize an API client:
 
 ```Java
-Client client = ClientFactory.create("https://local-svc.leanix.net/services/metrics/v1");
-PointsApi pointsApi = new PointsApi(client);
+apiClient = new ApiClientBuilder()
+                .withBasePath("https://test-app.leanix.net/services/metrics/v1")
+                .withTokenProviderHost("test-app.leanix.net")
+                .withPersonalAccessToken("my-personal-access-token")
+                .build();
+PointsApi pointsApi = new PointsApi(apiClient);
 ```
 
 ## Examples
@@ -34,7 +38,11 @@ We have created some simple examples to show you the main features of the SDK. S
 See [CreatePoint.java](samples/console/src/main/java/CreatePoint.java)
 
 ```Java
-Client client = ClientFactory.create("https://local-svc.leanix.net/services/metrics/v1");
+Client client = new ApiClientBuilder()
+                .withBasePath("https://local-svc.leanix.net/services/metrics/v1")
+                .withTokenProviderHost("local-svc.leanix.net")
+                .withPersonalAccessToken("my-personal-access-token")
+                .build();
 PointsApi pointsApi = new PointsApi(client);
 
 // Create a point
@@ -68,7 +76,10 @@ try {
 See [ShowSeries.java](samples/console/src/main/java/ShowSeries.java)
 
 ```Java
-Client client = ClientFactory.create("https://local-svc.leanix.net/services/metrics/v1");
+Client client = new ApiClientBuilder()
+                .withBasePath("https://local-svc.leanix.net/services/metrics/v1")
+                .withTokenProviderHost("local-svc.leanix.net")
+                .withPersonalAccessToken("my-personal-access-token");
 SeriesApi seriesApi = new SeriesApi(client);
 
 try {
@@ -96,7 +107,7 @@ try {
 # Update the SDK
 
 ## Generate new JAVA sources based service provided swagger.yaml 
-Base on the swagger's API specification (eg: https://boot2docker.leanix.net/services/metrics/v1/api-docs/swagger.json) the swagger API classes will be created.
+Base on the swagger's API specification (eg: https://test-app.leanix.net/services/metrics/v1/api-docs/swagger.json) the swagger API classes will be created.
 
 	mvn clean package -Pcodegen
 	

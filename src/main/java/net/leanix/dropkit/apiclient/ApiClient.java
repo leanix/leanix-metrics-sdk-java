@@ -46,6 +46,7 @@ import net.leanix.dropkit.apiclient.auth.Authentication;
 import net.leanix.dropkit.apiclient.auth.ClientCredentialRefreshingOAuth;
 import net.leanix.dropkit.apiclient.auth.HttpBasicAuth;
 import net.leanix.dropkit.apiclient.auth.OAuth;
+import net.leanix.dropkit.apiclient.auth.PersonalAccessTokenOAuth;
 
 /**
  * This class was originally created with swagger-codegen-maven-plugin's file version 2.1.6 and is slightly modified with features:
@@ -90,6 +91,7 @@ public class ApiClient {
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
     authentications.put("token", new ClientCredentialRefreshingOAuth());
+    authentications.put("pat", new PersonalAccessTokenOAuth());
     // Prevent the authentications from being modified.
     authentications = Collections.unmodifiableMap(authentications);
   }
@@ -204,7 +206,18 @@ public class ApiClient {
         throw new RuntimeException("No OAuth2 authentication configured!");
     }
 
-  /**
+  public void setPersonalAccessToken(String personalAccessToken, URI tokenUriPersonalAccessToken) {
+      for (Authentication auth : authentications.values()) {
+          if (auth instanceof PersonalAccessTokenOAuth) {
+              ((PersonalAccessTokenOAuth) auth).setPersonalAccessToken(personalAccessToken, tokenUriPersonalAccessToken);
+              ((PersonalAccessTokenOAuth) auth).setClient(httpClient);
+              return;
+          }
+      }
+      throw new RuntimeException("No PersonalAccessToken authentication configured!");
+    }
+
+/**
    * Helper method to set access token for the first OAuth2 authentication.
    */
   public void setAccessToken(String accessToken) {

@@ -9,6 +9,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.internal.util.Base64;
 
 import net.leanix.dropkit.apiclient.ApiException;
@@ -54,6 +55,10 @@ public class ClientCredentialRefreshingOAuth extends OAuth {
 
     @Override
     public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams) throws ApiException {
+        // skip this authentication if no clientId is specified
+        if (StringUtils.isEmpty(clientId) && !accessTokenSetManually) {
+            return;
+        }
         // If the access token is set manually, don't do
         // the token refresh via client credential flow anymore.
         if (!accessTokenSetManually) {
