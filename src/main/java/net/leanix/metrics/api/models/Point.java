@@ -1,107 +1,163 @@
-/*
-* The MIT License (MIT)	 
-*
-* Copyright (c) 2015 LeanIX GmbH
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy of
-* this software and associated documentation files (the "Software"), to deal in
-* the Software without restriction, including without limitation the rights to
-* use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-* the Software, and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-* FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-* COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-* IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 package net.leanix.metrics.api.models;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.io.Serializable;
-import java.util.Set;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.*;
+import java.util.List;
 import net.leanix.metrics.api.models.Field;
 import net.leanix.metrics.api.models.Tag;
-public class Point implements Serializable {
-    /* A name for the measurement */
-    private String measurement = null;
-    /* A UUID string to relate the point to a workspace or "shared" if the shared database should be used. */
-    private String workspaceId = null;
-    private Date time = null;
-    /* List of tags */
-    private List<Tag> tags = new ArrayList<Tag>();
-    /* List of fields */
-    private List<Field> fields = new ArrayList<Field>();
-    @JsonProperty("measurement")
-    public String getMeasurement() {
-        return measurement;
-    }
 
-    @JsonProperty("measurement")
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
-    }
 
-    @JsonProperty("workspaceId")
-    public String getWorkspaceId() {
-        return workspaceId;
-    }
 
-    @JsonProperty("workspaceId")
-    public void setWorkspaceId(String workspaceId) {
-        this.workspaceId = workspaceId;
-    }
 
-    @JsonProperty("time")
-    public Date getTime() {
-        return time;
-    }
 
-    @JsonProperty("time")
-    public void setTime(Date time) {
-        this.time = time;
-    }
 
-    @JsonProperty("tags")
-    public List<Tag> getTags() {
-        return tags;
-    }
+public class Point   {
+  
+  private String measurement = null;
+  private String workspaceId = null;
+  private Date time = null;
+  private List<Tag> tags = new ArrayList<Tag>();
+  private List<Field> fields = new ArrayList<Field>();
 
-    @JsonProperty("tags")
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
+  
+  /**
+   * A name for the measurement
+   **/
+  public Point measurement(String measurement) {
+    this.measurement = measurement;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "A name for the measurement")
+  @JsonProperty("measurement")
+  public String getMeasurement() {
+    return measurement;
+  }
+  public void setMeasurement(String measurement) {
+    this.measurement = measurement;
+  }
 
-    @JsonProperty("fields")
-    public List<Field> getFields() {
-        return fields;
-    }
+  
+  /**
+   * A UUID string to relate the point to a workspace or \"shared\" if the shared database should be used.
+   **/
+  public Point workspaceId(String workspaceId) {
+    this.workspaceId = workspaceId;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "A UUID string to relate the point to a workspace or \"shared\" if the shared database should be used.")
+  @JsonProperty("workspaceId")
+  public String getWorkspaceId() {
+    return workspaceId;
+  }
+  public void setWorkspaceId(String workspaceId) {
+    this.workspaceId = workspaceId;
+  }
 
-    @JsonProperty("fields")
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
-    }
+  
+  /**
+   **/
+  public Point time(Date time) {
+    this.time = time;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("time")
+  public Date getTime() {
+    return time;
+  }
+  public void setTime(Date time) {
+    this.time = time;
+  }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class Point {\n");
-        sb.append("  measurement: ").append(measurement).append("\n");
-        sb.append("  workspaceId: ").append(workspaceId).append("\n");
-        sb.append("  time: ").append(time).append("\n");
-        sb.append("  tags: ").append(tags).append("\n");
-        sb.append("  fields: ").append(fields).append("\n");
-        sb.append("}\n");
-        return sb.toString();
+  
+  /**
+   * List of tags
+   **/
+  public Point tags(List<Tag> tags) {
+    this.tags = tags;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "List of tags")
+  @JsonProperty("tags")
+  public List<Tag> getTags() {
+    return tags;
+  }
+  public void setTags(List<Tag> tags) {
+    this.tags = tags;
+  }
+
+  
+  /**
+   * List of fields
+   **/
+  public Point fields(List<Field> fields) {
+    this.fields = fields;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "List of fields")
+  @JsonProperty("fields")
+  public List<Field> getFields() {
+    return fields;
+  }
+  public void setFields(List<Field> fields) {
+    this.fields = fields;
+  }
+
+  
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Point point = (Point) o;
+    return Objects.equals(this.measurement, point.measurement) &&
+        Objects.equals(this.workspaceId, point.workspaceId) &&
+        Objects.equals(this.time, point.time) &&
+        Objects.equals(this.tags, point.tags) &&
+        Objects.equals(this.fields, point.fields);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(measurement, workspaceId, time, tags, fields);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class Point {\n");
+    
+    sb.append("    measurement: ").append(toIndentedString(measurement)).append("\n");
+    sb.append("    workspaceId: ").append(toIndentedString(workspaceId)).append("\n");
+    sb.append("    time: ").append(toIndentedString(time)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
 

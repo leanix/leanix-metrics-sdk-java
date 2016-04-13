@@ -7,26 +7,24 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import net.leanix.metrics.api.models.ApiError;
-import net.leanix.metrics.api.models.Series;
 
 
 
 
 
 
-public class SeriesResponse   {
+public class BasicResponse   {
   
   private String status = null;
   private String type = null;
   private String message = null;
   private List<ApiError> errors = new ArrayList<ApiError>();
   private Long total = null;
-  private Series data = null;
 
   
   /**
    **/
-  public SeriesResponse status(String status) {
+  public BasicResponse status(String status) {
     this.status = status;
     return this;
   }
@@ -43,7 +41,7 @@ public class SeriesResponse   {
   
   /**
    **/
-  public SeriesResponse type(String type) {
+  public BasicResponse type(String type) {
     this.type = type;
     return this;
   }
@@ -60,7 +58,7 @@ public class SeriesResponse   {
   
   /**
    **/
-  public SeriesResponse message(String message) {
+  public BasicResponse message(String message) {
     this.message = message;
     return this;
   }
@@ -77,7 +75,7 @@ public class SeriesResponse   {
   
   /**
    **/
-  public SeriesResponse errors(List<ApiError> errors) {
+  public BasicResponse errors(List<ApiError> errors) {
     this.errors = errors;
     return this;
   }
@@ -94,7 +92,7 @@ public class SeriesResponse   {
   
   /**
    **/
-  public SeriesResponse total(Long total) {
+  public BasicResponse total(Long total) {
     this.total = total;
     return this;
   }
@@ -109,23 +107,6 @@ public class SeriesResponse   {
   }
 
   
-  /**
-   **/
-  public SeriesResponse data(Series data) {
-    this.data = data;
-    return this;
-  }
-  
-  @ApiModelProperty(example = "null", value = "")
-  @JsonProperty("data")
-  public Series getData() {
-    return data;
-  }
-  public void setData(Series data) {
-    this.data = data;
-  }
-
-  
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -135,31 +116,29 @@ public class SeriesResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SeriesResponse seriesResponse = (SeriesResponse) o;
-    return Objects.equals(this.status, seriesResponse.status) &&
-        Objects.equals(this.type, seriesResponse.type) &&
-        Objects.equals(this.message, seriesResponse.message) &&
-        Objects.equals(this.errors, seriesResponse.errors) &&
-        Objects.equals(this.total, seriesResponse.total) &&
-        Objects.equals(this.data, seriesResponse.data);
+    BasicResponse basicResponse = (BasicResponse) o;
+    return Objects.equals(this.status, basicResponse.status) &&
+        Objects.equals(this.type, basicResponse.type) &&
+        Objects.equals(this.message, basicResponse.message) &&
+        Objects.equals(this.errors, basicResponse.errors) &&
+        Objects.equals(this.total, basicResponse.total);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(status, type, message, errors, total, data);
+    return Objects.hash(status, type, message, errors, total);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SeriesResponse {\n");
+    sb.append("class BasicResponse {\n");
     
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
     sb.append("    total: ").append(toIndentedString(total)).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }
