@@ -1,114 +1,178 @@
-/*
-* The MIT License (MIT)	 
-*
-* Copyright (c) 2015 LeanIX GmbH
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy of
-* this software and associated documentation files (the "Software"), to deal in
-* the Software without restriction, including without limitation the rights to
-* use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-* the Software, and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-* FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-* COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-* IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 package net.leanix.metrics.api.models;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.io.Serializable;
-import java.util.Set;
-
-import java.util.*;
-import net.leanix.metrics.api.models.Measurement;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import net.leanix.metrics.api.models.ApiError;
-public class MeasurementResponse implements Serializable {
-    private Measurement data = null;
-    private String message = null;
-    private String type = null;
-    private Long total = null;
-    private List<ApiError> errors = new ArrayList<ApiError>();
-    private String status = null;
-    @JsonProperty("data")
-    public Measurement getData() {
-        return data;
-    }
+import net.leanix.metrics.api.models.Measurement;
 
-    @JsonProperty("data")
-    public void setData(Measurement data) {
-        this.data = data;
-    }
 
-    @JsonProperty("message")
-    public String getMessage() {
-        return message;
-    }
 
-    @JsonProperty("message")
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
 
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
-    }
 
-    @JsonProperty("total")
-    public Long getTotal() {
-        return total;
-    }
+public class MeasurementResponse   {
+  
+  private String status = null;
+  private String type = null;
+  private String message = null;
+  private List<ApiError> errors = new ArrayList<ApiError>();
+  private Long total = null;
+  private Measurement data = null;
 
-    @JsonProperty("total")
-    public void setTotal(Long total) {
-        this.total = total;
-    }
+  
+  /**
+   **/
+  public MeasurementResponse status(String status) {
+    this.status = status;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("status")
+  public String getStatus() {
+    return status;
+  }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    @JsonProperty("errors")
-    public List<ApiError> getErrors() {
-        return errors;
-    }
+  
+  /**
+   **/
+  public MeasurementResponse type(String type) {
+    this.type = type;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("type")
+  public String getType() {
+    return type;
+  }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    @JsonProperty("errors")
-    public void setErrors(List<ApiError> errors) {
-        this.errors = errors;
-    }
+  
+  /**
+   **/
+  public MeasurementResponse message(String message) {
+    this.message = message;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("message")
+  public String getMessage() {
+    return message;
+  }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 
-    @JsonProperty("status")
-    public String getStatus() {
-        return status;
-    }
+  
+  /**
+   **/
+  public MeasurementResponse errors(List<ApiError> errors) {
+    this.errors = errors;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("errors")
+  public List<ApiError> getErrors() {
+    return errors;
+  }
+  public void setErrors(List<ApiError> errors) {
+    this.errors = errors;
+  }
 
-    @JsonProperty("status")
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  
+  /**
+   **/
+  public MeasurementResponse total(Long total) {
+    this.total = total;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("total")
+  public Long getTotal() {
+    return total;
+  }
+  public void setTotal(Long total) {
+    this.total = total;
+  }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class MeasurementResponse {\n");
-        sb.append("  data: ").append(data).append("\n");
-        sb.append("  message: ").append(message).append("\n");
-        sb.append("  type: ").append(type).append("\n");
-        sb.append("  total: ").append(total).append("\n");
-        sb.append("  errors: ").append(errors).append("\n");
-        sb.append("  status: ").append(status).append("\n");
-        sb.append("}\n");
-        return sb.toString();
+  
+  /**
+   **/
+  public MeasurementResponse data(Measurement data) {
+    this.data = data;
+    return this;
+  }
+  
+  @ApiModelProperty(example = "null", value = "")
+  @JsonProperty("data")
+  public Measurement getData() {
+    return data;
+  }
+  public void setData(Measurement data) {
+    this.data = data;
+  }
+
+  
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    MeasurementResponse measurementResponse = (MeasurementResponse) o;
+    return Objects.equals(this.status, measurementResponse.status) &&
+        Objects.equals(this.type, measurementResponse.type) &&
+        Objects.equals(this.message, measurementResponse.message) &&
+        Objects.equals(this.errors, measurementResponse.errors) &&
+        Objects.equals(this.total, measurementResponse.total) &&
+        Objects.equals(this.data, measurementResponse.data);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(status, type, message, errors, total, data);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class MeasurementResponse {\n");
+    
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
+    sb.append("    total: ").append(toIndentedString(total)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
 

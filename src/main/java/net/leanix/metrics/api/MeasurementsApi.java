@@ -1,128 +1,137 @@
-/*
-* The MIT License (MIT)	 
-*
-* Copyright (c) 2015 LeanIX GmbH
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy of
-* this software and associated documentation files (the "Software"), to deal in
-* the Software without restriction, including without limitation the rights to
-* use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-* the Software, and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-* FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-* COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-* IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 package net.leanix.metrics.api;
 
-import net.leanix.dropkit.api.Client;
-import net.leanix.dropkit.api.ApiException;
-import net.leanix.dropkit.api.ValidationException;
-import net.leanix.dropkit.api.Response;
-import net.leanix.metrics.api.models.MeasurementListResponse;
-import net.leanix.metrics.api.models.MeasurementResponse;
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
+import net.leanix.dropkit.apiclient.ApiException;
+import net.leanix.dropkit.apiclient.ApiClient;
+import net.leanix.dropkit.apiclient.Configuration;
+import net.leanix.dropkit.apiclient.Pair;
 
+import javax.ws.rs.core.GenericType;
+
+import net.leanix.metrics.api.models.MeasurementResponse;
+import net.leanix.metrics.api.models.MeasurementListResponse;
+
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
 
 public class MeasurementsApi {
-    private Client apiClient;
+  private ApiClient apiClient;
 
-    public MeasurementsApi(Client client) {
-        if (client == null)
-            throw new IllegalArgumentException("client is null");
+  public MeasurementsApi() {
+    this(Configuration.getDefaultApiClient());
+  }
 
-        this.apiClient = client;
+  public MeasurementsApi(ApiClient apiClient) {
+    this.apiClient = apiClient;
+  }
+
+  public ApiClient getApiClient() {
+    return apiClient;
+  }
+
+  public void setApiClient(ApiClient apiClient) {
+    this.apiClient = apiClient;
+  }
+
+  
+  /**
+   * deleteMeasurement
+   * Deletes a measurement
+   * @param name The name of the measurement (required)
+   * @param workspaceId WorkspaceID in UUID format (optional)
+   * @return MeasurementResponse
+   * @throws ApiException if fails to make API call
+   */
+  public MeasurementResponse deleteMeasurement(String name, String workspaceId) throws ApiException {
+    Object localVarPostBody = null;
+    
+    // verify the required parameter 'name' is set
+    if (name == null) {
+      throw new ApiException(400, "Missing the required parameter 'name' when calling deleteMeasurement");
     }
+    
+    // create path and map variables
+    String localVarPath = "/measurements/{name}".replaceAll("\\{format\\}","json")
+      .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
 
-    public Client getClient() {
-        return this.apiClient;
-    }
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    private static MultivaluedMap<String, String> buildmvm(Map<String, String> map) {
-        MultivaluedMapImpl mvMap = new MultivaluedMapImpl();
-        for (Map.Entry<String, String> entry: map.entrySet()) {
-            mvMap.add(entry.getKey(), entry.getValue());
-        }
-        return mvMap;
-    }
+    
+    localVarQueryParams.addAll(apiClient.parameterToPairs("", "workspaceId", workspaceId));
+    
 
-    /**
-     * getMeasurements.
-     * Endpoint to retrieve all measurements
-     *
-     * @throws ApiException
-     */
-    public MeasurementListResponse getMeasurements (String q, String workspaceId) throws ApiException {
-        // create path and map variables
-        String path = "/measurements".replaceAll("\\{format\\}","json");
+    
 
-        // query params
-        Map<String, String> queryParams = new HashMap<String, String>();
-        if(!"null".equals(String.valueOf(q)))
-        queryParams.put("q", String.valueOf(q));
-        if(!"null".equals(String.valueOf(workspaceId)))
-        queryParams.put("workspaceId", String.valueOf(workspaceId));
-        Map<String, String> headerParams = new HashMap<String, String>();
-        try {
-            return apiClient.resource(path)
-                .queryParams(buildmvm(queryParams))
-                .method("GET", MeasurementListResponse.class);
-        } catch (UniformInterfaceException ex) {
-            if (ex.getResponse().getStatus() == 404) {
-                return null;
-            } else if(ex.getResponse().getStatus() == 422) {
-                throw new ValidationException(ex.getResponse().getEntity(Response.class));
-            } else {
-                throw new ApiException(ex.getResponse().getStatus(), ex.getResponse().toString());
-            }
-        }
-    }
-    /**
-     * deleteMeasurement.
-     * Deletes a measurement
-     *
-     * @throws ApiException
-     */
-    public MeasurementResponse deleteSubscription (String workspaceId, String name) throws ApiException {
-        // verify required params are set
-        if(name == null ) {
-            throw new ApiException(400, "missing required params");
-        }
-        // create path and map variables
-        String path = "/measurements/{name}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "name" + "\\}", name.toString());
+    
 
-        // query params
-        Map<String, String> queryParams = new HashMap<String, String>();
-        if(!"null".equals(String.valueOf(workspaceId)))
-        queryParams.put("workspaceId", String.valueOf(workspaceId));
-        Map<String, String> headerParams = new HashMap<String, String>();
-        try {
-            return apiClient.resource(path)
-                .queryParams(buildmvm(queryParams))
-                .method("DELETE", MeasurementResponse.class);
-        } catch (UniformInterfaceException ex) {
-            if (ex.getResponse().getStatus() == 404) {
-                return null;
-            } else if(ex.getResponse().getStatus() == 422) {
-                throw new ValidationException(ex.getResponse().getEntity(Response.class));
-            } else {
-                throw new ApiException(ex.getResponse().getStatus(), ex.getResponse().toString());
-            }
-        }
-    }
-    }
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
 
+    final String[] localVarContentTypes = {
+      
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "pat", "token" };
+
+    
+    GenericType<MeasurementResponse> localVarReturnType = new GenericType<MeasurementResponse>() {};
+    return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    
+  }
+  
+  /**
+   * getMeasurements
+   * Endpoint to retrieve all measurements
+   * @param q Query for measurements, e.g. tagKey = &#39;tagValue&#39; (optional)
+   * @param workspaceId WorkspaceID in UUID format (optional)
+   * @return MeasurementListResponse
+   * @throws ApiException if fails to make API call
+   */
+  public MeasurementListResponse getMeasurements(String q, String workspaceId) throws ApiException {
+    Object localVarPostBody = null;
+    
+    // create path and map variables
+    String localVarPath = "/measurements".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+    
+    localVarQueryParams.addAll(apiClient.parameterToPairs("", "q", q));
+    
+    localVarQueryParams.addAll(apiClient.parameterToPairs("", "workspaceId", workspaceId));
+    
+
+    
+
+    
+
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+    final String[] localVarContentTypes = {
+      
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "pat", "token" };
+
+    
+    GenericType<MeasurementListResponse> localVarReturnType = new GenericType<MeasurementListResponse>() {};
+    return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    
+  }
+  
+}

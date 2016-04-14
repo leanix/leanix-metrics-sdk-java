@@ -4,12 +4,12 @@
 
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.2.4</version>
+    <version>0.2.5</version>
 
     <parent>
         <groupId>net.leanix.poms</groupId>
         <artifactId>sdk-parent</artifactId>
-        <version>0.9.7</version>
+        <version>0.9.8</version>
         <relativePath />
     </parent>
 
@@ -18,14 +18,6 @@
     <description>SDK for Java to access leanIX Metrics REST API</description>
 
     <url>https://developer.leanix.net</url>
-
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <scm>
         <url>https://github.com/leanix/leanix-metrics-sdk-java</url>
@@ -46,71 +38,91 @@
         </developer>
     </developers>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
+    <properties>
+        <sdk-name>metrics</sdk-name>
+        <leanix-dropkit-sdk-utils-version>1.0.1-SNAPSHOT</leanix-dropkit-sdk-utils-version>
 
+        <!-- Specify the host which provides the swagger 2.0 API description -->
+        <codegenHost>test-svc.leanix.net</codegenHost>
+        <swagger-inputSpec>https://${codegenHost}/services/metrics/v1/api-docs/swagger.json</swagger-inputSpec>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*ApiTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>root-templates</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/filtering</directory>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.basedir}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <configuration>
+                    <allowSnapshots>false</allowSnapshots>
+                    <allowUntracked>false</allowUntracked>
+                    <noDeploy>true</noDeploy>
+                    <pushReleases>false</pushReleases>
+                    <enableSshAgent>true</enableSshAgent>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+<!-- get help...
     <profiles>
         <profile>
-            <id>main</id>
-
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
+            <id>codegen</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.2</version>
-                        <extensions>true</extensions>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.1.6</version>
                         <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <configHelp>true</configHelp>
                         </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <!-- just for building the library without upload to public repository -->
-            <id>no-sign</id>
-        </profile>
     </profiles>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.leanix</groupId>
-            <artifactId>leanix-dropkit-sdk-utils</artifactId>
-        </dependency>
-    </dependencies>
+        -->
 </project>

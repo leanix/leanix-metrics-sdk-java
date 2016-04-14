@@ -1,3 +1,4 @@
+
 /*
 * The MIT License (MIT)	 
 *
@@ -22,26 +23,35 @@
 */
 
 import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.management.OperatingSystemMXBean;
-import net.leanix.dropkit.api.ApiException;
-import net.leanix.dropkit.api.Client;
-import net.leanix.dropkit.api.ClientFactory;
+import net.leanix.dropkit.apiclient.ApiClient;
+import net.leanix.dropkit.apiclient.ApiClientBuilder;
+import net.leanix.dropkit.apiclient.ApiException;
 import net.leanix.metrics.api.PointsApi;
 import net.leanix.metrics.api.models.Field;
 import net.leanix.metrics.api.models.Point;
 import net.leanix.metrics.api.models.Tag;
 
 public class CreatePoints {
-    public static void main(String[] args) {
-        Client client = ClientFactory.create("https://local-svc.leanix.net/services/metrics/v1");
-        final PointsApi pointsApi = new PointsApi(client);
 
+    public static void main(String[] args) {
+        String host = args[0];
+        String pas = args[1];
+        final String workspaceId = args[2];
+        ApiClient apiClient = new ApiClientBuilder()
+                .withBasePath(String.format("https://%s/services/metrics/v1", host))
+                .withTokenProviderHost(host)
+                .withPersonalAccessToken(pas)
+                // .withDebugging(true)
+                .build();
+
+        final PointsApi pointsApi = new PointsApi(apiClient);
 
         Runnable helloRunnable = new Runnable() {
             public void run() {
@@ -51,12 +61,12 @@ public class CreatePoints {
                 // Create a point
                 Point p1 = new Point();
                 p1.setMeasurement("CPU");
-                p1.setWorkspaceId("a4b07dea-1056-4fe7-a9b5-cc5645991fda");
+                p1.setWorkspaceId(workspaceId);
 
                 // Add a field
                 Field f1 = new Field();
                 f1.setK("load");
-                f1.setV(new Float(osBean.getProcessCpuLoad()));
+                f1.setV(osBean.getSystemLoadAverage());
 
                 // Add a tag
                 Tag t1 = new Tag();
