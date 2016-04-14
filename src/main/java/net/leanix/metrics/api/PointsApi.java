@@ -77,7 +77,7 @@ public class PointsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "pat", "token" };
+    String[] localVarAuthNames = new String[] { "token" };
 
     
     GenericType<BasicResponse> localVarReturnType = new GenericType<BasicResponse>() {};
@@ -124,7 +124,7 @@ public class PointsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "pat", "token" };
+    String[] localVarAuthNames = new String[] { "token" };
 
     
     GenericType<PointResponse> localVarReturnType = new GenericType<PointResponse>() {};

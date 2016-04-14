@@ -23,8 +23,7 @@ public class ApiClientBuilder {
 
     private String basePath;
 
-    private URI oauth2TokenUriClientSecret = URI.create("https://boot2docker.leanix.net/services/mtm/v1/oauth2/token");
-    private URI tokenUriPersonalAccessToken = URI.create("https://boot2docker.leanix.net/services/mtm/v1/personalAccessToken");
+    private URI oauth2TokenUri;
 
     private String clientId;
     private String clientSecret;
@@ -42,9 +41,9 @@ public class ApiClientBuilder {
 
         apiClient.setDebugging(debugging);
         if (personalAccessToken != null && !personalAccessToken.isEmpty()) {
-            apiClient.setPersonalAccessToken(personalAccessToken, tokenUriPersonalAccessToken);
+            apiClient.setPersonalAccessToken(personalAccessToken, oauth2TokenUri);
         } else if (clientId != null && clientSecret != null) {
-            apiClient.setClientCredentials(clientId, clientSecret, oauth2TokenUriClientSecret);
+            apiClient.setClientCredentials(clientId, clientSecret, oauth2TokenUri);
         }
         apiClient.setBasePath(basePath);
 
@@ -70,8 +69,6 @@ public class ApiClientBuilder {
      */
     public ApiClientBuilder withTokenProviderHost(String host) {
         withOAuth2TokenUrl(URI.create(String.format("https://%s/services/mtm/v1/oauth2/token", host)));
-        withPersonalAccessTokenUrl(
-                URI.create(String.format("https://%s/services/mtm/v1/personalAccessTokens/oauthAccessToken", host)));
         return this;
     }
 
@@ -106,18 +103,7 @@ public class ApiClientBuilder {
      * @return
      */
     public ApiClientBuilder withOAuth2TokenUrl(URI uri) {
-        this.oauth2TokenUriClientSecret = uri;
-        return this;
-    }
-
-    /**
-     * Sets the url that is used when a new access token will be fetched with specified personal access token.
-     * 
-     * @param uri
-     * @return
-     */
-    public ApiClientBuilder withPersonalAccessTokenUrl(URI uri) {
-        this.tokenUriPersonalAccessToken = uri;
+        this.oauth2TokenUri = uri;
         return this;
     }
 
