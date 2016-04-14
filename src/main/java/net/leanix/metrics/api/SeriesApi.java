@@ -74,7 +74,7 @@ public class SeriesApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "token" };
+    String[] localVarAuthNames = new String[] { "pat", "token" };
 
     
     GenericType<SeriesResponse> localVarReturnType = new GenericType<SeriesResponse>() {};

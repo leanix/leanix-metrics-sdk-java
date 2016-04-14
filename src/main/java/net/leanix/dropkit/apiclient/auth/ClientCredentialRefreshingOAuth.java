@@ -50,18 +50,16 @@ public class ClientCredentialRefreshingOAuth extends OAuth {
         // If the access token is set manually here, don't do
         // the token refresh via client credential flow anymore.
         accessTokenSetManually = accessToken != null;
+        accessTokenResponse = null;
         super.setAccessToken(accessToken);
     }
 
     @Override
     public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams) throws ApiException {
-        // skip this authentication if no clientId is specified
-        if (StringUtils.isEmpty(clientId) && !accessTokenSetManually) {
-            return;
-        }
         // If the access token is set manually, don't do
         // the token refresh via client credential flow anymore.
-        if (!accessTokenSetManually) {
+        if (!accessTokenSetManually && !StringUtils.isEmpty(clientId)) {
+            // skip this authentication if access token is set manually and no clientId is specified
             if (accessTokenResponse == null || accessTokenResponse.isExpired()) {
                 fetchToken();
 

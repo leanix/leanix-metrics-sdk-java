@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.leanix.dropkit.apiclient.ApiClient;
+import net.leanix.dropkit.apiclient.ApiClientBuilder;
 import net.leanix.dropkit.apiclient.ApiException;
 import net.leanix.metrics.api.PointsApi;
 import net.leanix.metrics.api.models.Field;
@@ -40,12 +41,15 @@ import net.leanix.metrics.api.models.Tag;
 public class CreatePoints {
 
     public static void main(String[] args) {
-        ApiClient apiClient = new ApiClient();
-        apiClient.setBasePath("https://local-svc.leanix.net/services/metrics/v1");
-        apiClient.setDebugging(true);
-
-        // TODO rwe: set Personal Access Token here
-        // apiClient.setClientCredentials("", CLIENT_SECRET, URI.create(tokenUrl));
+        String host = args[0];
+        String pas = args[1];
+        final String workspaceId = args[2];
+        ApiClient apiClient = new ApiClientBuilder()
+                .withBasePath(String.format("https://%s/services/metrics/v1", host))
+                .withTokenProviderHost(host)
+                .withPersonalAccessToken(pas)
+                // .withDebugging(true)
+                .build();
 
         final PointsApi pointsApi = new PointsApi(apiClient);
 
@@ -57,7 +61,7 @@ public class CreatePoints {
                 // Create a point
                 Point p1 = new Point();
                 p1.setMeasurement("CPU");
-                p1.setWorkspaceId("a4b07dea-1056-4fe7-a9b5-cc5645991fda");
+                p1.setWorkspaceId(workspaceId);
 
                 // Add a field
                 Field f1 = new Field();
