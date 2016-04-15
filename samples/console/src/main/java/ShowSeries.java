@@ -25,7 +25,10 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.leanix.dropkit.apiclient.ApiClient;
+import net.leanix.dropkit.apiclient.ApiClientBuilder;
 import net.leanix.dropkit.apiclient.ApiException;
 import net.leanix.metrics.api.SeriesApi;
 import net.leanix.metrics.api.models.SeriesResponse;
@@ -34,17 +37,22 @@ import net.leanix.metrics.api.models.Value;
 public class ShowSeries {
 
     public static void main(String[] args) {
-        ApiClient apiClient = new ApiClient();
-        apiClient.setBasePath("https://local-svc.leanix.net/services/metrics/v1");
-        apiClient.setDebugging(true);
 
-        // TODO rwe: set Personal Access Token here
+        String host = args[0];
+        String pas = args[1];
+        final String workspaceId = args[2];
+        ApiClient apiClient = new ApiClientBuilder()
+                .withBasePath(String.format("https://%s/services/metrics/v1", host))
+                .withTokenProviderHost(host)
+                .withPersonalAccessToken(pas)
+                .withDebugging(true)
+                .build();
 
         SeriesApi seriesApi = new SeriesApi(apiClient);
 
         try {
             SeriesResponse response = seriesApi
-                    .getSeries("SELECT MAX(Series1) FROM availability WHERE time > '2016-01-01' GROUP BY time(1d)", "abc");
+                    .getSeries("SELECT MAX(load) FROM CPU WHERE time > '2016-01-01' GROUP BY time(1d)", workspaceId);
 
             System.out.println("Showing data of measurement: " + response.getData().getName());
 

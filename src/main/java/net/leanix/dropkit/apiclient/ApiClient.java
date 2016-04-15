@@ -8,7 +8,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,6 +73,9 @@ public class ApiClient {
     json = new JSON();
     httpClient = buildHttpClient(debugging);
     
+    /** rwe: Disable this feature, that was introduced in swagger-codegen. We want to use the ISO 8601.
+     * See original templage: https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen/src/main/resources/Java/libraries/jersey2/ApiClient.mustache
+     
     // Use RFC3339 format for date and datetime.
     // See http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html#anchor14
     this.dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
@@ -83,7 +84,7 @@ public class ApiClient {
     this.dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
     this.json.setDateFormat((DateFormat) dateFormat.clone());
-
+    */
     // Set default User-Agent.
     setUserAgent("Swagger-Codegen/1.0.0/java");
 
@@ -204,7 +205,18 @@ public class ApiClient {
         throw new RuntimeException("No OAuth2 authentication configured!");
     }
 
-  /**
+  public void setPersonalAccessToken(String personalAccessToken, URI tokenUrl) {
+      for (Authentication auth : authentications.values()) {
+          if (auth instanceof ClientCredentialRefreshingOAuth) {
+              ((ClientCredentialRefreshingOAuth) auth).setClientCredentials("PersonalAccessToken", personalAccessToken, tokenUrl);
+              ((ClientCredentialRefreshingOAuth) auth).setClient(httpClient);
+              return;
+          }
+      }
+      throw new RuntimeException("No PersonalAccessToken authentication configured!");
+    }
+
+/**
    * Helper method to set access token for the first OAuth2 authentication.
    */
   public void setAccessToken(String accessToken) {
