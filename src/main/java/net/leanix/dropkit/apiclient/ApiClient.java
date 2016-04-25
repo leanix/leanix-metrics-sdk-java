@@ -8,7 +8,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,7 +44,6 @@ import net.leanix.dropkit.apiclient.auth.Authentication;
 import net.leanix.dropkit.apiclient.auth.ClientCredentialRefreshingOAuth;
 import net.leanix.dropkit.apiclient.auth.HttpBasicAuth;
 import net.leanix.dropkit.apiclient.auth.OAuth;
-import net.leanix.dropkit.apiclient.auth.PersonalAccessTokenOAuth;
 
 /**
  * This class was originally created with swagger-codegen-maven-plugin's file version 2.1.6 and is slightly modified with features:
@@ -94,7 +91,6 @@ public class ApiClient {
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
     authentications.put("token", new ClientCredentialRefreshingOAuth());
-    authentications.put("pat", new PersonalAccessTokenOAuth());
     // Prevent the authentications from being modified.
     authentications = Collections.unmodifiableMap(authentications);
   }
@@ -209,11 +205,11 @@ public class ApiClient {
         throw new RuntimeException("No OAuth2 authentication configured!");
     }
 
-  public void setPersonalAccessToken(String personalAccessToken, URI tokenUriPersonalAccessToken) {
+  public void setPersonalAccessToken(String personalAccessToken, URI tokenUrl) {
       for (Authentication auth : authentications.values()) {
-          if (auth instanceof PersonalAccessTokenOAuth) {
-              ((PersonalAccessTokenOAuth) auth).setPersonalAccessToken(personalAccessToken, tokenUriPersonalAccessToken);
-              ((PersonalAccessTokenOAuth) auth).setClient(httpClient);
+          if (auth instanceof ClientCredentialRefreshingOAuth) {
+              ((ClientCredentialRefreshingOAuth) auth).setClientCredentials("PersonalAccessToken", personalAccessToken, tokenUrl);
+              ((ClientCredentialRefreshingOAuth) auth).setClient(httpClient);
               return;
           }
       }

@@ -79,7 +79,7 @@ public class MeasurementsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "pat", "token" };
+    String[] localVarAuthNames = new String[] { "token" };
 
     
     GenericType<MeasurementResponse> localVarReturnType = new GenericType<MeasurementResponse>() {};
@@ -126,7 +126,7 @@ public class MeasurementsApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "pat", "token" };
+    String[] localVarAuthNames = new String[] { "token" };
 
     
     GenericType<MeasurementListResponse> localVarReturnType = new GenericType<MeasurementListResponse>() {};
