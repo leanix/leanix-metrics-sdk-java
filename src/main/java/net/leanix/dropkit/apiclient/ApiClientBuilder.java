@@ -51,7 +51,7 @@ public class ApiClientBuilder {
     }
 
     /**
-     * Set the base url that is used to access your service. EG: <code>https://test-app.leanix.net/services/metrics/v1</code>
+     * Sets the base url that is used to access your service. EG: <code>https://test-app.leanix.net/services/metrics/v1</code>
      * 
      * @param basePath
      * @return
@@ -86,7 +86,7 @@ public class ApiClientBuilder {
     }
 
     /**
-     * Set the personal access token that is used to retrieve an access token.
+     * Sets the personal access token that is used to retrieve an access token.
      * 
      * @param personalAccessToken
      * @return
@@ -97,7 +97,8 @@ public class ApiClientBuilder {
     }
 
     /**
-     * Sets the url that is used when a new access token will be fetched with specified client id and client secret.
+     * Sets the url that is used when a new access token will be fetched with specified client id and client secret. This oauth2TokenUri
+     * must only be set if the automatically created url in {@linkplain #withTokenProviderHost(String)} does not fit.
      * 
      * @param uri
      * @return
