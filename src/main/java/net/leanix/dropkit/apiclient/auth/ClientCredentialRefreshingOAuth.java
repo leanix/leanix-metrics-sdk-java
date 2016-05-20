@@ -68,11 +68,11 @@ public class ClientCredentialRefreshingOAuth extends OAuth {
             accessTokenResponse = jerseyClient
                     .target(tokenUrl)
                     .queryParam("grant_type", "client_credentials")
-                    .request(MediaType.APPLICATION_FORM_URLENCODED/* MediaType.APPLICATION_JSON */)
+                    .request()
                     .accept(MediaType.APPLICATION_JSON)
-                    // .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
                     .header(HttpHeaders.AUTHORIZATION, basicAuthorizationHeader)
-                    .post(null, AccessTokenResponse.class);
+                    .post(null, net.leanix.dropkit.apiclient.auth.responses.AccessTokenResponse.class);
         } catch (RuntimeException ex) {
             throw new ApiException("Failed to retrieve a new oauth token from " + tokenUrl, ex, 0, null);
         }
