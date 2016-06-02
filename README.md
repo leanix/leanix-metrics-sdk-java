@@ -13,7 +13,7 @@ Add a dependency to your maven project:
   <dependency>
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.2.8</version>
+    <version>0.2.9</version>
   </dependency>
 </dependencies>
 ```
