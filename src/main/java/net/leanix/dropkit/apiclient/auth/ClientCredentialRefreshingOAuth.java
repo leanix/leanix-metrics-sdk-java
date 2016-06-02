@@ -1,5 +1,11 @@
 package net.leanix.dropkit.apiclient.auth;
 
+import net.leanix.dropkit.apiclient.ApiException;
+import net.leanix.dropkit.apiclient.Pair;
+import net.leanix.dropkit.apiclient.auth.responses.AccessTokenResponse;
+
+import org.glassfish.jersey.internal.util.Base64;
+
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -8,12 +14,6 @@ import java.util.Map;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-
-import org.glassfish.jersey.internal.util.Base64;
-
-import net.leanix.dropkit.apiclient.ApiException;
-import net.leanix.dropkit.apiclient.Pair;
-import net.leanix.dropkit.apiclient.auth.responses.AccessTokenResponse;
 
 public class ClientCredentialRefreshingOAuth extends OAuth {
 
@@ -72,7 +72,7 @@ public class ClientCredentialRefreshingOAuth extends OAuth {
                     .accept(MediaType.APPLICATION_JSON)
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
                     .header(HttpHeaders.AUTHORIZATION, basicAuthorizationHeader)
-                    .post(null, net.leanix.dropkit.apiclient.auth.responses.AccessTokenResponse.class);
+                    .post(null, AccessTokenResponse.class);
         } catch (RuntimeException ex) {
             throw new ApiException("Failed to retrieve a new oauth token from " + tokenUrl, ex, 0, null);
         }
