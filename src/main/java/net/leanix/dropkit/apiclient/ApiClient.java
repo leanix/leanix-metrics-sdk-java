@@ -205,18 +205,26 @@ public class ApiClient {
         throw new RuntimeException("No OAuth2 authentication configured!");
     }
 
-  public void setPersonalAccessToken(String personalAccessToken, URI tokenUrl) {
-      for (Authentication auth : authentications.values()) {
-          if (auth instanceof ClientCredentialRefreshingOAuth) {
-              ((ClientCredentialRefreshingOAuth) auth).setClientCredentials("PersonalAccessToken", personalAccessToken, tokenUrl);
-              ((ClientCredentialRefreshingOAuth) auth).setClient(httpClient);
-              return;
-          }
+  public void setApiToken(String apiToken, URI tokenUrl) {
+    for (Authentication auth : authentications.values()) {
+      if (auth instanceof ClientCredentialRefreshingOAuth) {
+        ((ClientCredentialRefreshingOAuth) auth).setClientCredentials("apitoken", apiToken, tokenUrl);
+        ((ClientCredentialRefreshingOAuth) auth).setClient(httpClient);
+        return;
       }
-      throw new RuntimeException("No PersonalAccessToken authentication configured!");
     }
+    throw new RuntimeException("No PersonalAccessToken authentication configured!");
+  }
 
-/**
+  /**
+   * only for compatibility, use setApiToken instead.
+   */
+  @Deprecated
+  public void setPersonalAccessToken(String personalAccessToken, URI tokenUrl) {
+    setApiToken(personalAccessToken, tokenUrl);
+  }
+
+  /**
    * Helper method to set access token for the first OAuth2 authentication.
    */
   public void setAccessToken(String accessToken) {
