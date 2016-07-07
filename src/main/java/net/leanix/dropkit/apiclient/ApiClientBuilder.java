@@ -28,7 +28,7 @@ public class ApiClientBuilder {
     private String clientId;
     private String clientSecret;
 
-    private String personalAccessToken;
+    private String apiToken;
 
     private boolean debugging = false;
 
@@ -40,8 +40,8 @@ public class ApiClientBuilder {
         ApiClient apiClient = new ApiClient();
 
         apiClient.setDebugging(debugging);
-        if (personalAccessToken != null && !personalAccessToken.isEmpty()) {
-            apiClient.setPersonalAccessToken(personalAccessToken, oauth2TokenUri);
+        if (apiToken != null && !apiToken.isEmpty()) {
+            apiClient.setApiToken(apiToken, oauth2TokenUri);
         } else if (clientId != null && clientSecret != null) {
             apiClient.setClientCredentials(clientId, clientSecret, oauth2TokenUri);
         }
@@ -86,13 +86,24 @@ public class ApiClientBuilder {
     }
 
     /**
-     * Sets the personal access token that is used to retrieve an access token.
-     * 
+     * Set the API token that is used to retrieve an access token.
+     *
+     * @return this
+     */
+    public ApiClientBuilder withApiToken(String apiToken) {
+        this.apiToken = apiToken;
+        return this;
+    }
+
+    /**
+     * Set the personal access token that is used to retrieve an access token. Only for backward compatibility, use withApiToken instead.
+     *
      * @param personalAccessToken
-     * @return
+     * @return this
+     * @deprecated use {@linkplain #withApiToken(String)} instead
      */
     public ApiClientBuilder withPersonalAccessToken(String personalAccessToken) {
-        this.personalAccessToken = personalAccessToken;
+        this.apiToken = personalAccessToken;
         return this;
     }
 
