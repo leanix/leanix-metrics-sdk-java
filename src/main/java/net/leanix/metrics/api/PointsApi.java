@@ -7,10 +7,10 @@ import net.leanix.dropkit.apiclient.Pair;
 
 import javax.ws.rs.core.GenericType;
 
-import net.leanix.metrics.api.models.DemoDataRequest;
 import net.leanix.metrics.api.models.BasicResponse;
-import net.leanix.metrics.api.models.PointResponse;
+import net.leanix.metrics.api.models.DemoDataRequest;
 import net.leanix.metrics.api.models.Point;
+import net.leanix.metrics.api.models.PointResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,6 @@ public class PointsApi {
     this.apiClient = apiClient;
   }
 
-  
   /**
    * createDemoPoints
    * Endpoint to create a measurement with demo points
@@ -54,19 +53,16 @@ public class PointsApi {
     }
     
     // create path and map variables
-    String localVarPath = "/points/createDemoPoints".replaceAll("\\{format\\}","json");
+    String localVarPath = "/points/createDemoPoints";
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -79,12 +75,9 @@ public class PointsApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<BasicResponse> localVarReturnType = new GenericType<BasicResponse>() {};
     return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
   /**
    * createPoint
    * Endpoint to create a new data point
@@ -101,19 +94,16 @@ public class PointsApi {
     }
     
     // create path and map variables
-    String localVarPath = "/points".replaceAll("\\{format\\}","json");
+    String localVarPath = "/points";
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -126,10 +116,7 @@ public class PointsApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<PointResponse> localVarReturnType = new GenericType<PointResponse>() {};
     return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
 }

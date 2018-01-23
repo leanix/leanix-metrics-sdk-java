@@ -31,7 +31,7 @@ Add a dependency to your maven project:
   <dependency>
     <groupId>net.leanix</groupId>
     <artifactId>leanix-metrics-sdk-java</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2-SNAPSHOT</version>
   </dependency>
 </dependencies>
 ```
