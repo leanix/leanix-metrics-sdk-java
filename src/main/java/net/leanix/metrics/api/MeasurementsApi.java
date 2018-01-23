@@ -7,8 +7,8 @@ import net.leanix.dropkit.apiclient.Pair;
 
 import javax.ws.rs.core.GenericType;
 
-import net.leanix.metrics.api.models.MeasurementResponse;
 import net.leanix.metrics.api.models.MeasurementListResponse;
+import net.leanix.metrics.api.models.MeasurementResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +35,6 @@ public class MeasurementsApi {
     this.apiClient = apiClient;
   }
 
-  
   /**
    * deleteMeasurement
    * Deletes a measurement
@@ -53,7 +52,7 @@ public class MeasurementsApi {
     }
     
     // create path and map variables
-    String localVarPath = "/measurements/{name}".replaceAll("\\{format\\}","json")
+    String localVarPath = "/measurements/{name}"
       .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
 
     // query params
@@ -61,14 +60,10 @@ public class MeasurementsApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
     localVarQueryParams.addAll(apiClient.parameterToPairs("", "workspaceId", workspaceId));
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -81,16 +76,13 @@ public class MeasurementsApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<MeasurementResponse> localVarReturnType = new GenericType<MeasurementResponse>() {};
     return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
   /**
    * getMeasurements
    * Endpoint to retrieve all measurements
-   * @param q Query for measurements, e.g. tagKey = &#39;tagValue&#39; (optional)
+   * @param q Query for measurements, e.g. tagKey &#x3D; &#39;tagValue&#39; (optional)
    * @param workspaceId WorkspaceID in UUID format (optional)
    * @return MeasurementListResponse
    * @throws ApiException if fails to make API call
@@ -99,23 +91,18 @@ public class MeasurementsApi {
     Object localVarPostBody = null;
     
     // create path and map variables
-    String localVarPath = "/measurements".replaceAll("\\{format\\}","json");
+    String localVarPath = "/measurements";
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
     localVarQueryParams.addAll(apiClient.parameterToPairs("", "q", q));
-    
     localVarQueryParams.addAll(apiClient.parameterToPairs("", "workspaceId", workspaceId));
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -128,10 +115,7 @@ public class MeasurementsApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<MeasurementListResponse> localVarReturnType = new GenericType<MeasurementListResponse>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
 }

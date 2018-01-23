@@ -34,7 +34,6 @@ public class SeriesApi {
     this.apiClient = apiClient;
   }
 
-  
   /**
    * getSeries
    * Endpoint to query results
@@ -47,23 +46,18 @@ public class SeriesApi {
     Object localVarPostBody = null;
     
     // create path and map variables
-    String localVarPath = "/series".replaceAll("\\{format\\}","json");
+    String localVarPath = "/series";
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
     localVarQueryParams.addAll(apiClient.parameterToPairs("", "q", q));
-    
     localVarQueryParams.addAll(apiClient.parameterToPairs("", "workspaceId", workspaceId));
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -76,10 +70,7 @@ public class SeriesApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<SeriesResponse> localVarReturnType = new GenericType<SeriesResponse>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
 }

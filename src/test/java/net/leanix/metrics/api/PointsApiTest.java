@@ -14,8 +14,10 @@
 package net.leanix.metrics.api;
 
 import net.leanix.dropkit.apiclient.ApiException;
-import net.leanix.metrics.api.models.MeasurementListResponse;
-import net.leanix.metrics.api.models.MeasurementResponse;
+import net.leanix.metrics.api.models.BasicResponse;
+import net.leanix.metrics.api.models.DemoDataRequest;
+import net.leanix.metrics.api.models.Point;
+import net.leanix.metrics.api.models.PointResponse;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -25,44 +27,42 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * API tests for MeasurementsApi
+ * API tests for PointsApi
  */
 @Ignore
-public class MeasurementsApiTest {
+public class PointsApiTest {
 
-    private final MeasurementsApi api = new MeasurementsApi();
+    private final PointsApi api = new PointsApi();
 
     
     /**
-     * deleteMeasurement
+     * createDemoPoints
      *
-     * Deletes a measurement
+     * Endpoint to create a measurement with demo points
      *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
-    public void deleteMeasurementTest() throws ApiException {
-        String name = null;
-        String workspaceId = null;
-        MeasurementResponse response = api.deleteMeasurement(name, workspaceId);
+    public void createDemoPointsTest() throws ApiException {
+        DemoDataRequest demoDataRequest = null;
+        BasicResponse response = api.createDemoPoints(demoDataRequest);
 
         // TODO: test validations
     }
     
     /**
-     * getMeasurements
+     * createPoint
      *
-     * Endpoint to retrieve all measurements
+     * Endpoint to create a new data point
      *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
-    public void getMeasurementsTest() throws ApiException {
-        String q = null;
-        String workspaceId = null;
-        MeasurementListResponse response = api.getMeasurements(q, workspaceId);
+    public void createPointTest() throws ApiException {
+        Point point = null;
+        PointResponse response = api.createPoint(point);
 
         // TODO: test validations
     }

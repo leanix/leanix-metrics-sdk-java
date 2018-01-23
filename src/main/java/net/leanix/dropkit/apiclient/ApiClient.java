@@ -238,6 +238,20 @@ public class ApiClient {
   }
 
   /**
+   * Returns the OAuth2 access token that was last obtained in a previous request
+   * using OAuth2 authentication.
+   * @return
+   */
+  public String getAccessToken() {
+    for (Authentication auth : authentications.values()) {
+      if (auth instanceof OAuth) {
+        return ((OAuth) auth).getAccessToken();
+      }
+    }
+    throw new IllegalStateException("No OAuth2 authentication configured!");
+  }
+
+  /**
    * Set the User-Agent header's value (by adding to the default header map).
    */
   public ApiClient setUserAgent(String userAgent) {
@@ -685,7 +699,7 @@ public class ApiClient {
   /**
    * Build the Client used to make HTTP requests.
    */
-  private Client buildHttpClient(boolean debugging) {
+  public Client buildHttpClient(boolean debugging) {
     final ClientConfig clientConfig = new ClientConfig();
     clientConfig.register(MultiPartFeature.class);
     clientConfig.register(json);

@@ -34,7 +34,6 @@ public class WorkspacesApi {
     this.apiClient = apiClient;
   }
 
-  
   /**
    * deleteMeasurementOfWorkspace
    * Deletes all measurements of a workspace
@@ -51,7 +50,7 @@ public class WorkspacesApi {
     }
     
     // create path and map variables
-    String localVarPath = "/workspaces/{wsId}".replaceAll("\\{format\\}","json")
+    String localVarPath = "/workspaces/{wsId}"
       .replaceAll("\\{" + "wsId" + "\\}", apiClient.escapeString(wsId.toString()));
 
     // query params
@@ -59,12 +58,9 @@ public class WorkspacesApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-    
 
     
-
     
-
     final String[] localVarAccepts = {
       "application/json"
     };
@@ -77,10 +73,7 @@ public class WorkspacesApi {
 
     String[] localVarAuthNames = new String[] { "token" };
 
-    
     GenericType<MeasurementResponse> localVarReturnType = new GenericType<MeasurementResponse>() {};
     return apiClient.invokeAPI(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    
-  }
-  
+      }
 }
